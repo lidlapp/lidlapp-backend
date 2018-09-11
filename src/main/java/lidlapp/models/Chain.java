@@ -3,9 +3,11 @@ package lidlapp.models;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Entity
 public class Chain {
     private Chain(){
     }
