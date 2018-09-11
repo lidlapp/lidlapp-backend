@@ -20,8 +20,10 @@ public class User {
     @Column(nullable = false)
     private String nickname;
 
+    @Column(nullable = false)
     private String iban;
 
+    @Column(nullable = false)
     private String name;
 
     public Long getId() {
