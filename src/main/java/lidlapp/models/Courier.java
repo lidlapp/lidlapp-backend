@@ -1,16 +1,15 @@
 package lidlapp.models;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-public class Courier {
-    private Courier() {
+public class Courier implements Serializable {
+    public Courier() {
     }
 
     @Id
@@ -24,7 +23,7 @@ public class Courier {
     private String status;
 
     @Column(nullable = false)
-    private DateTime eta;
+    private Date eta;
 
     public Long getId() {
         return id;
@@ -38,7 +37,7 @@ public class Courier {
         return status;
     }
 
-    public DateTime getEta() {
+    public Date getEta() {
         return eta;
     }
 
@@ -54,7 +53,7 @@ public class Courier {
         this.status = status;
     }
 
-    public void setEta(DateTime eta) {
+    public void setEta(Date eta) {
         this.eta = eta;
     }
 }

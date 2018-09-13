@@ -1,14 +1,13 @@
 package lidlapp.models;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class Chain {
+public class Chain implements Serializable {
     private Chain(){
     }
 
@@ -23,5 +22,5 @@ public class Chain {
     private String iconUrl;
 
     @Column(nullable = false)
-    private DateTime siteUrl;
+    private String siteUrl;
 }
