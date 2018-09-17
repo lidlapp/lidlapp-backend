@@ -27,10 +27,10 @@ public class Courier implements Serializable {
     @OneToMany
     private Set<OrderItem> orderItems;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Store store;
     
     @OneToMany

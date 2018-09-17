@@ -17,8 +17,7 @@ public class OrderItem implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
-    @Column (nullable = false)
+    @ManyToOne(optional = false)
     private Product product;
     
     private Payment payment;

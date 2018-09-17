@@ -1,6 +1,7 @@
 package lidlapp.repos;
 
 import lidlapp.models.Courier;
+import lidlapp.models.CourierStatus;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ class CourierRepositoryTest {
         var courier = new Courier();
         courier.setPickUpLocation("Hello World");
         courier.setEta(new Date());
-        courier.setStatus("Hello World");
+        courier.setStatus(CourierStatus.ON_THE_WAY);
         var courierId = courierRepository.save(courier).getId();
         assertThat(courierId).isGreaterThan(0);
     }
