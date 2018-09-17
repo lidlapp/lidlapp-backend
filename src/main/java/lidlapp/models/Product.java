@@ -14,7 +14,7 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
@@ -25,7 +25,7 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private String imgUrl;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class Product implements Serializable {
         return imgUrl;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

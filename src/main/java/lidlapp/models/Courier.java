@@ -1,7 +1,9 @@
 package lidlapp.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import javax.swing.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -22,16 +24,29 @@ public class Courier implements Serializable {
     
     @Id
     @GeneratedValue
-    private Long id;
-    
+    private long id;
+
+    @JsonIgnore
     @OneToMany
     private Set<OrderItem> orderItems;
-    
+
+    @JsonIgnore
     @ManyToOne(optional = false)
     private User user;
-    
+
+    @JsonGetter
+    public String getNickname() {
+        return user.getNickname();
+    }
+
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Store store;
+
+    @JsonGetter
+    public long getStoreId() {
+        return store.getId();
+    }
     
     @OneToMany
     private Set<Payment> payments;
@@ -44,11 +59,11 @@ public class Courier implements Serializable {
 
     @Column(nullable = false)
     private Date eta;
-    
-    public Long getId() {
+
+    public long getId() {
         return id;
     }
-    
+
     public Set<OrderItem> getOrderItems() {
         return orderItems;
     }

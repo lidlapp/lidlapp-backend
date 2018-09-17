@@ -16,26 +16,26 @@ public class Store implements Serializable {
     
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
     
     @Column(nullable = false)
     private String name;
     
     @Column(nullable = false)
     private String location;
-    
-    @ManyToOne(optional = false)
+
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     private Chain chain;
-    
-    public void setId(Long id) {
+
+    public void setId(long id) {
         this.id = id;
     }
     
     public void setLocation(String location) {
         this.location = location;
     }
-    
-    public Long getId() {
+
+    public long getId() {
         return id;
     }
     

@@ -13,7 +13,7 @@ public class Payment implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
 
     @Column(nullable = false)
     private String status;
@@ -21,7 +21,7 @@ public class Payment implements Serializable {
     @Column(nullable = false)
     private String tikkieLink;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -33,7 +33,7 @@ public class Payment implements Serializable {
         return tikkieLink;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

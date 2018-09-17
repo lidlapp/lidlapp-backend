@@ -1,12 +1,8 @@
 package lidlapp.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class OrderItem implements Serializable {
@@ -15,7 +11,7 @@ public class OrderItem implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
 
     @ManyToOne(optional = false)
     private Product product;

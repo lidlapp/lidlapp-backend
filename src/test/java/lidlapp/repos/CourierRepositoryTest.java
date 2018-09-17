@@ -1,7 +1,9 @@
 package lidlapp.repos;
 
+import lidlapp.models.Chain;
 import lidlapp.models.Courier;
 import lidlapp.models.CourierStatus;
+import lidlapp.models.Store;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ class CourierRepositoryTest {
     @Autowired
     private CourierRepository courierRepository;
 
+    @Autowired
+    private StoreRepository storeRepository;
+
     @Test
     void insertCourier() {
         var courier = new Courier();
@@ -26,5 +31,12 @@ class CourierRepositoryTest {
         courier.setStatus(CourierStatus.ON_THE_WAY);
         var courierId = courierRepository.save(courier).getId();
         assertThat(courierId).isGreaterThan(0);
+    }
+
+    @Test
+    void insertStore() {
+        var chain = new Chain("Albert Hein", "", "");
+        var store = new Store("Albert Hein", "", chain);
+        storeRepository.save(store);
     }
 }
