@@ -17,7 +17,7 @@ public class Chain implements Serializable {
     
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -43,7 +43,7 @@ public class Chain implements Serializable {
         this.siteUrl = siteUrl;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
     

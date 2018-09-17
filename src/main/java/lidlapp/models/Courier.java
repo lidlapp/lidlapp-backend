@@ -24,7 +24,7 @@ public class Courier implements Serializable {
     
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @JsonIgnore
     @OneToMany
@@ -60,7 +60,7 @@ public class Courier implements Serializable {
     @Column(nullable = false)
     private Date eta;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

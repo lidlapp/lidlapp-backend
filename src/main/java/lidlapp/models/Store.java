@@ -16,7 +16,7 @@ public class Store implements Serializable {
     
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     
     @Column(nullable = false)
     private String name;
@@ -27,7 +27,7 @@ public class Store implements Serializable {
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     private Chain chain;
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -35,7 +35,7 @@ public class Store implements Serializable {
         this.location = location;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
     

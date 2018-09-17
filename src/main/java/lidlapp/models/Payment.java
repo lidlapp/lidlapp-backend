@@ -1,10 +1,8 @@
 package lidlapp.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Payment implements Serializable {
@@ -13,7 +11,7 @@ public class Payment implements Serializable {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String status;
@@ -21,7 +19,10 @@ public class Payment implements Serializable {
     @Column(nullable = false)
     private String tikkieLink;
 
-    public long getId() {
+    @OneToMany
+    private Set<OrderItem> items;
+
+    public Long getId() {
         return id;
     }
 
@@ -33,7 +34,7 @@ public class Payment implements Serializable {
         return tikkieLink;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
