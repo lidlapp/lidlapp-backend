@@ -11,6 +11,11 @@ public class User implements Serializable {
     private User() {
     }
 
+    public User(String email, String nickname) {
+        this.email = email;
+        this.nickname = nickname;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
