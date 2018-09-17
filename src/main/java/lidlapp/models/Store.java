@@ -11,9 +11,17 @@ public class Store implements Serializable {
     private Store() {
     }
 
+    public Store(String name, String location) {
+        this.name = name;
+        this.location = location;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false)
     private String location;
