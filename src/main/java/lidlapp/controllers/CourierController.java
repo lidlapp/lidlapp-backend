@@ -22,11 +22,8 @@ public class CourierController {
     }
 
     @PostMapping
-    public Courier newCourier(@RequestBody Courier body) throws Exception {
+    public Courier newCourier(@RequestBody CourierSignUp body) throws Exception {
         // Validate input
-        if (body.getId() != 0) {
-            throw new Exception("Id should be null");
-        }
         // Validate ETA
         //todo
         // Validate pick up location
@@ -35,7 +32,7 @@ public class CourierController {
         }
 //        body.setStatus();
 
-        var courier = new Courier();
+        var courier = new Courier(null, null, body.getPickUpLocation(), body.getEta());
         repository.save(courier);
         return courier;
     }
