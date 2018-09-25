@@ -5,7 +5,7 @@ import java.util.Date;
 public class CourierSignUp {
     private String pickUpLocation;
     private Date eta;
-    private int storeId;
+    private long storeId;
 
     public CourierSignUp() {
     }
@@ -26,11 +26,11 @@ public class CourierSignUp {
         this.eta = eta;
     }
 
-    public int getStoreId() {
+    public long getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(long storeId) {
         this.storeId = storeId;
     }
 }

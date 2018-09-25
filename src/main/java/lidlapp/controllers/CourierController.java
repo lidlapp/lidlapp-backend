@@ -1,28 +1,31 @@
 package lidlapp.controllers;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Iterables;
 import lidlapp.models.Courier;
 import lidlapp.repos.CourierRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import lidlapp.repos.StoreRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("courier")
+@RestController
+@RequestMapping("api/courier")
 public class CourierController {
-    private final CourierRepository repository;
+    private final CourierRepository courierRepository;
+    private final StoreRepository storeRepository;
 
-    public CourierController(CourierRepository repository) {
-        this.repository = repository;
+    public CourierController(CourierRepository courierRepository, StoreRepository storeRepository) {
+        this.courierRepository = courierRepository;
+        this.storeRepository = storeRepository;
     }
 
     @GetMapping
-    public Iterable<Courier> getCouriers() {
-        return repository.findAll();
+    public Courier[] getCouriers(Authentication auth) {
+        return Iterables.toArray(courierRepository.findAll(), Courier.class);
     }
 
     @PostMapping
-    public Courier newCourier(@RequestBody CourierSignUp body) throws Exception {
+    public Courier newCourier(@RequestBody CourierSignUp body, Authentication auth) throws Exception {
         // Validate input
         // Validate ETA
         //todo
@@ -31,9 +34,9 @@ public class CourierController {
             throw new Exception("Provide a pick-up-location");
         }
 //        body.setStatus();
-
-        var courier = new Courier(null, null, body.getPickUpLocation(), body.getEta());
-        repository.save(courier);
+        var store = storeRepository.findById(body.getStoreId()).orElseThrow();
+        var courier = new Courier(null, store, body.getPickUpLocation(), body.getEta());
+        courierRepository.save(courier);
         return courier;
     }
 }

@@ -1,4 +1,4 @@
-package lidlapp;
+package lidlapp.config;
 
 import org.eclipse.persistence.config.PersistenceUnitProperties;
 import org.springframework.beans.factory.ObjectProvider;
