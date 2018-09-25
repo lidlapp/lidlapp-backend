@@ -2,13 +2,12 @@ package lidlapp.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
 public class User implements Serializable {
-    private User() {
+    public User() {
     }
 
     public User(String email, String nickname) {
@@ -17,24 +16,22 @@ public class User implements Serializable {
     }
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String nickname;
 
     private String iban;
 
     private String name;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
