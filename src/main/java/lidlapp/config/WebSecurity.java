@@ -24,10 +24,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .csrf().and()
                 .authorizeRequests()
-                .antMatchers("/store").authenticated()
+                .antMatchers("/store").fullyAuthenticated()
                 .anyRequest().permitAll();
-//                .and()
-//                .addFilter(new JwtAuthorizationFilter(authenticationManager()));
 
         var jwkProvider = new UrlJwkProvider(new URL(JWK));
         var provider = new JwtAuthenticationProvider(jwkProvider, ISSUER, AUDIENCE);
