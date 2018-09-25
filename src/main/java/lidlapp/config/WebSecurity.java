@@ -17,7 +17,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .addFilterAfter(OpenIdConnectFilter(), OAuth2ClientContextFilter.class)
                 .httpBasic().disable()
                 .csrf().and()
                 .authorizeRequests()
