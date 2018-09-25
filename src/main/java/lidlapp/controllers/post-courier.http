@@ -2,6 +2,7 @@ POST http://localhost:9090/api/courier
 Content-Type: application/json
 
 {
+  "storeId": 1,
   "pickUpLocation": "Ergens",
   "eta": "2018-09-24T12:51:18.456Z"
 }

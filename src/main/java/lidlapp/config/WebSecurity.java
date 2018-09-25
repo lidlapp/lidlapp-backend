@@ -1,13 +1,13 @@
-package lidlapp;
+package lidlapp.config;
 
-import com.auth0.jwk.JwkProvider;
-import com.auth0.jwk.UrlJwkProvider;
 import com.auth0.spring.security.api.JwtWebSecurityConfigurer;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import java.net.URL;
-
+@Configuration
+@EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private static final String JWK = "https://www.googleapis.com/oauth2/v2/certs";
     private static final String AUDIENCE = "611765389674-fondb1lr61g90qnbb51c02jqbio5t6g5.apps.googleusercontent.com";
@@ -16,13 +16,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/h2-console/*").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .headers().frameOptions().disable();
-        JwkProvider provider = new UrlJwkProvider(new URL(JWK));
-
+        http
+                .httpBasic().disable()
+                .csrf().and()
+                .authorizeRequests()
+                .antMatchers("/store").authenticated()
+                .anyRequest().permitAll();
         JwtWebSecurityConfigurer
                 .forRS256(AUDIENCE, ISSUER)
                 .configure(http);
