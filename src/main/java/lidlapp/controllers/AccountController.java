@@ -38,6 +38,7 @@ public class AccountController {
         if (!Strings.isNullOrEmpty(iban)) {
             user.setIban(iban);
         }
+        userRepository.save(user);
         return user;
     }
 }

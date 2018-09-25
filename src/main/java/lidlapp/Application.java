@@ -43,6 +43,7 @@ public class Application {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/**")
+                        .allowedMethods("*")
                         .allowCredentials(true);
             }
         };
