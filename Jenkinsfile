@@ -1,5 +1,10 @@
 pipeline {
-    agent { docker { image 'maven:3-jdk-10' } }
+    agent {
+        docker {
+            image 'maven:3-jdk-10'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
     stages {
         stage('Build') {
             steps {
