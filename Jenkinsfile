@@ -2,8 +2,7 @@ pipeline {
   agent {
     docker {
       image 'maven:3-jdk-10'
-      args '''-v $HOME/.m2:/root/.m2
--v /var/lidlapp-backend:/var/lidlapp-backend'''
+      args '-v $HOME/.m2:/root/.m2 -v /var/lidlapp-backend:/var/lidlapp-backend'
     }
 
   }
@@ -27,7 +26,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh './deploy'
+        sh './deploy.sh'
       }
     }
   }
