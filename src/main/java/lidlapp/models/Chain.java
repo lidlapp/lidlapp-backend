@@ -1,8 +1,10 @@
 package lidlapp.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 public class Chain implements Serializable {
@@ -27,9 +29,6 @@ public class Chain implements Serializable {
 
     @Column(nullable = false)
     private String siteUrl;
-    
-    @OneToMany
-    private Set<Product> products;
     
     public void setName(String name) {
         this.name = name;
@@ -57,9 +56,5 @@ public class Chain implements Serializable {
     
     public String getSiteUrl() {
         return siteUrl;
-    }
-    
-    public Set<Product> getProducts() {
-        return products;
     }
 }
