@@ -38,6 +38,9 @@ public class OrderItem implements Serializable {
     @ManyToOne
     private User consumer;
 
+    @ManyToOne
+    private Courier courier;
+
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
