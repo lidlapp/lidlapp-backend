@@ -1,3 +1,1 @@
-systemctl stop lidlapp
-mv target/lidlapp.jar /var/lidlapp-backend/
-systemctl start lidlapp
+mv target/lidlapp.war /var/lidlapp-backend/webapps/ROOT.war

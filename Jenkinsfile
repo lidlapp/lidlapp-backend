@@ -10,21 +10,23 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean install'
             }
-        }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+                }
+            }        }
         stage('Test') {
             post {
                 always {
                     junit '**/target/surefire-reports/*.xml'
-
                 }
-
             }
             steps {
                 sh 'mvn test'
             }
         }
         stage('Deploy') {
-            agent none
+            when { branch 'master' }
             steps {
                 sh './deploy.sh'
             }
