@@ -38,7 +38,7 @@ public class Application extends SpringBootServletInitializer {
             var user = new User("henk@mail", "Henkie");
             user.setId("myId");
             userRepository.save(user);
-            var courier = new Courier(user, store, "Open ruimte op de 3e", new Date());
+            var courier = new Courier(user, "Lidl", "Open ruimte op de 3e", new Date());
             courierRepository.save(courier);
         };
     }

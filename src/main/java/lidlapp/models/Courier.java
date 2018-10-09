@@ -12,8 +12,8 @@ import java.util.Set;
 public class Courier implements Serializable {
     public Courier() {
     }
-    
-    public Courier(User user, Store store, String pickUpLocation, Date eta) {
+
+    public Courier(User user, String store, String pickUpLocation, Date eta) {
         this.user = user;
         this.store = store;
         this.payments = null;
@@ -39,8 +39,7 @@ public class Courier implements Serializable {
         return user.getNickname();
     }
 
-    @ManyToOne(optional = false)
-    private Store store;
+    private String store;
 
     @OneToMany
     private Set<Payment> payments;
@@ -65,8 +64,8 @@ public class Courier implements Serializable {
     public User getUser() {
         return user;
     }
-    
-    public Store getStore() {
+
+    public String getStore() {
         return store;
     }
     
@@ -85,8 +84,8 @@ public class Courier implements Serializable {
     public Date getEta() {
         return eta;
     }
-    
-    public void setStore(Store store) {
+
+    public void setStore(String store) {
         this.store = store;
     }
     

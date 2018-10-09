@@ -8,6 +8,9 @@ import org.springframework.security.core.Authentication;
 
 public interface UserRepository extends CrudRepository<User, String> {
     default User findByAuth(Authentication authentication) {
+        if (authentication == null) {
+            throw new IllegalArgumentException("Authentication is null");
+        }
         var userId = (String) authentication.getPrincipal();
         if (Strings.isNullOrEmpty(userId) || !authentication.isAuthenticated()) {
             throw new IllegalArgumentException("Not authenticated");
