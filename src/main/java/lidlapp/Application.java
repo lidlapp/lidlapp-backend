@@ -36,6 +36,7 @@ public class Application extends SpringBootServletInitializer {
             var store = new Store("Lidl", "51445485,5487261", chain);
             storeRepository.save(store);
             var user = new User("henk@mail", "Henkie");
+            user.setId("myId");
             userRepository.save(user);
             var courier = new Courier(user, store, "Open ruimte op de 3e", new Date());
             courierRepository.save(courier);
@@ -49,6 +50,7 @@ public class Application extends SpringBootServletInitializer {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/**")
+                        .allowedMethods("*")
                         .allowCredentials(true);
             }
         };

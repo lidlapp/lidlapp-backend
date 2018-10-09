@@ -1,10 +1,14 @@
 package lidlapp.config;
 
+import com.auth0.jwk.UrlJwkProvider;
+import com.auth0.spring.security.api.JwtAuthenticationProvider;
 import com.auth0.spring.security.api.JwtWebSecurityConfigurer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import java.net.URL;
 
 @Configuration
 @EnableWebSecurity
@@ -20,10 +24,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .csrf().and()
                 .authorizeRequests()
-                .antMatchers("/store").authenticated()
+                .antMatchers("/account").fullyAuthenticated()
                 .anyRequest().permitAll();
+
+        var jwkProvider = new UrlJwkProvider(new URL(JWK));
+        var provider = new JwtAuthenticationProvider(jwkProvider, ISSUER, AUDIENCE);
         JwtWebSecurityConfigurer
-                .forRS256(AUDIENCE, ISSUER)
+                .forRS256(AUDIENCE, ISSUER, provider)
                 .configure(http);
     }
 }

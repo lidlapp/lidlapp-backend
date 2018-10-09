@@ -20,7 +20,7 @@ public class CourierController {
     }
 
     @GetMapping
-    public Courier[] getCouriers(Authentication auth) {
+    public Courier[] getCouriers(Authentication authentication) {
         return Iterables.toArray(courierRepository.findAll(), Courier.class);
     }
 
