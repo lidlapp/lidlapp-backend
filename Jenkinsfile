@@ -24,7 +24,7 @@ pipeline {
             }
         }
         stage('Deploy') {
-            agent none
+            when { branch 'master' }
             steps {
                 sh './deploy.sh'
             }
