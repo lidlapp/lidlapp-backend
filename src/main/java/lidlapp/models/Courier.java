@@ -39,15 +39,9 @@ public class Courier implements Serializable {
         return user.getNickname();
     }
 
-    @JsonIgnore
     @ManyToOne(optional = false)
     private Store store;
 
-    @JsonGetter
-    public long getStoreId() {
-        return store.getId();
-    }
-    
     @OneToMany
     private Set<Payment> payments;
 
