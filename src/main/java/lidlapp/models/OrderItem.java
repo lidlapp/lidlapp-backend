@@ -9,7 +9,7 @@ public class OrderItem implements Serializable {
     private OrderItem() {
     }
 
-    public OrderItem(Product product, Integer amount, BigDecimal actualPrice) {
+    public OrderItem(String product, Integer amount, BigDecimal actualPrice) {
         this.product = product;
         this.amount = amount;
         this.actualPrice = actualPrice;
@@ -21,8 +21,7 @@ public class OrderItem implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(optional = false)
-    private Product product;
+    private String product;
 
     @Column(nullable = false)
     private Integer amount;
@@ -35,6 +34,12 @@ public class OrderItem implements Serializable {
 
     @Column(nullable = false)
     private boolean outOfStock;
+
+    @ManyToOne
+    private User consumer;
+
+    @ManyToOne
+    private Courier courier;
 
     public void setAmount(Integer amount) {
         this.amount = amount;
@@ -56,7 +61,7 @@ public class OrderItem implements Serializable {
         return id;
     }
 
-    public Product getProduct() {
+    public String getProduct() {
         return product;
     }
 

@@ -27,7 +27,7 @@ public class Courier implements Serializable {
     private Long id;
 
     @JsonIgnore
-    @OneToMany
+    @OneToMany(mappedBy = "courier")
     private Set<OrderItem> orderItems;
 
     @JsonIgnore

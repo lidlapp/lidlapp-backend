@@ -10,6 +10,8 @@ import lidlapp.repos.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,7 +19,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.Date;
 
 @SpringBootApplication()
-public class Application {
+public class Application extends SpringBootServletInitializer {
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -29,6 +36,7 @@ public class Application {
             var store = new Store("Lidl", "51445485,5487261", chain);
             storeRepository.save(store);
             var user = new User("henk@mail", "Henkie");
+            user.setId("myId");
             userRepository.save(user);
             var courier = new Courier(user, store, "Open ruimte op de 3e", new Date());
             courierRepository.save(courier);
@@ -42,6 +50,7 @@ public class Application {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/**")
+                        .allowedMethods("*")
                         .allowCredentials(true);
             }
         };
