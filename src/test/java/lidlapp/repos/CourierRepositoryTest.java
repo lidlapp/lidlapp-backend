@@ -43,4 +43,23 @@ class CourierRepositoryTest {
         var store = new Store("Albert Hein", "", chain);
         storeRepository.save(store);
     }
+
+    @Test
+    void makeOrders() {
+        var user = userRepository.save(new User("jan@mail", "Jan", "jan1234"));
+        var courier = courierRepository.save(new Courier(user, "Lidl", "3.21", new Date()));
+
+        user.getOrders().addAll(Arrays.asList(
+                new OrderItem("Apple", courier, user),
+                new OrderItem("Banana", courier, user)
+        ));
+
+        user = userRepository.save(user);
+        courier = courierRepository.save(courier);
+
+        var actualProducts = courier.getOrderItems().stream()
+                .map(OrderItem::getProduct);
+        assertThat(actualProducts)
+                .containsExactly("Apple", "Banana");
+    }
 }
