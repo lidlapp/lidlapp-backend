@@ -1,5 +1,6 @@
 package lidlapp.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -69,5 +70,10 @@ public class OrderItem implements Serializable {
 
     public boolean isOutOfStock() {
         return outOfStock;
+    }
+
+    @JsonGetter
+    public String getConsumerId() {
+        return consumer.getId();
     }
 }
