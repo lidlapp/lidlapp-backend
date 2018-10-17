@@ -1,27 +1,31 @@
 package lidlapp.repos;
 
-import lidlapp.models.Chain;
-import lidlapp.models.Courier;
-import lidlapp.models.CourierStatus;
-import lidlapp.models.Store;
+import lidlapp.config.JpaConfiguration;
+import lidlapp.models.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@DataJpaTest
+@Import(JpaConfiguration.class)
 class CourierRepositoryTest {
     @Autowired
     private CourierRepository courierRepository;
 
     @Autowired
     private StoreRepository storeRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     void insertCourier() {
