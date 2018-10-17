@@ -4,7 +4,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import lidlapp.models.Courier;
 import lidlapp.repos.CourierRepository;
-import lidlapp.repos.StoreRepository;
 import lidlapp.repos.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +14,10 @@ import java.util.Date;
 @RequestMapping("api/courier")
 public class CourierController {
     private final CourierRepository courierRepository;
-    private final StoreRepository storeRepository;
     private final UserRepository userRepository;
 
-    public CourierController(CourierRepository courierRepository, StoreRepository storeRepository, UserRepository userRepository) {
+    public CourierController(CourierRepository courierRepository, UserRepository userRepository) {
         this.courierRepository = courierRepository;
-        this.storeRepository = storeRepository;
         this.userRepository = userRepository;
     }
 
