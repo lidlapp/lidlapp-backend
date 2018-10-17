@@ -2,6 +2,7 @@ package lidlapp.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,7 +29,7 @@ public class User implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "consumer", cascade = CascadeType.ALL)
-    private Set<OrderItem> orders;
+    private Set<OrderItem> orders = new HashSet<>();
 
     public String getId() {
         return id;
