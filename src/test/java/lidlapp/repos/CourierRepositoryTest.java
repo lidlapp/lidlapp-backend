@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -27,6 +28,9 @@ class CourierRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TestEntityManager em;
+
     @Test
     void insertCourier() {
         var courier = new Courier();
@@ -46,16 +50,16 @@ class CourierRepositoryTest {
 
     @Test
     void makeOrders() {
-        var user = userRepository.save(new User("jan@mail", "Jan", "jan1234"));
-        var courier = courierRepository.save(new Courier(user, "Lidl", "3.21", new Date()));
+        var user = em.persist(new User("jan@mail", "Jan", "jan1234"));
+        var courier = em.persist(new Courier(user, "Lidl", "3.21", new Date()));
 
         user.getOrders().addAll(Arrays.asList(
                 new OrderItem("Apple", courier, user),
                 new OrderItem("Banana", courier, user)
         ));
 
-        user = userRepository.save(user);
-        courier = courierRepository.save(courier);
+        user = em.persistAndFlush(user);
+        courier = em.refresh(courier);
 
         var actualProducts = courier.getOrderItems().stream()
                 .map(OrderItem::getProduct);
