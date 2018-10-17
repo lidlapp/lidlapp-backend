@@ -1,13 +1,11 @@
 package lidlapp.repos;
 
-import lidlapp.config.JpaConfiguration;
 import lidlapp.models.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
@@ -17,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-@Import(JpaConfiguration.class)
 class CourierRepositoryTest {
     @Autowired
     private CourierRepository courierRepository;
@@ -64,6 +61,6 @@ class CourierRepositoryTest {
         var actualProducts = courier.getOrderItems().stream()
                 .map(OrderItem::getProduct);
         assertThat(actualProducts)
-                .containsExactly("Apple", "Banana");
+                .containsExactlyInAnyOrder("Apple", "Banana");
     }
 }
