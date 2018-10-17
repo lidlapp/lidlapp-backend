@@ -1,16 +1,16 @@
 package lidlapp.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class User implements Serializable {
     public User() {
     }
 
-    public User(String email, String nickname) {
+    public User(String email, String nickname, String id) {
+        this.id = id;
         this.email = email;
         this.nickname = nickname;
     }
@@ -26,6 +26,9 @@ public class User implements Serializable {
     private String iban;
 
     private String name;
+
+    @OneToMany(mappedBy = "consumer", cascade = CascadeType.ALL)
+    private Set<OrderItem> orders;
 
     public String getId() {
         return id;
@@ -65,5 +68,13 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<OrderItem> getOrders() {
+        return orders;
+    }
+
+    public void addOrder(Courier courier, String product) {
+        orders.add(new OrderItem(product, courier, this));
     }
 }
