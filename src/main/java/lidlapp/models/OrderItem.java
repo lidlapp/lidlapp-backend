@@ -1,5 +1,7 @@
 package lidlapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,12 +11,10 @@ public class OrderItem implements Serializable {
     private OrderItem() {
     }
 
-    public OrderItem(String product, Integer amount, BigDecimal actualPrice) {
+    public OrderItem(String product, Courier courier, User consumer) {
         this.product = product;
-        this.amount = amount;
-        this.actualPrice = actualPrice;
-        this.accepted = false;
-        this.outOfStock = false;
+        this.courier = courier;
+        this.consumer = consumer;
     }
 
     @Id
@@ -23,27 +23,21 @@ public class OrderItem implements Serializable {
 
     private String product;
 
-    @Column(nullable = false)
-    private Integer amount;
-
-    @Column(nullable = false)
     private BigDecimal actualPrice;
 
-    @Column(nullable = false)
+    // TODO: 2018-10-17 Consider the use of an enum
     private boolean accepted;
 
     @Column(nullable = false)
-    private boolean outOfStock;
+    private boolean outOfStock = false;
 
+    @JsonIgnore
     @ManyToOne
     private User consumer;
 
+    @JsonIgnore
     @ManyToOne
     private Courier courier;
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
 
     public void setActualPrice(BigDecimal actualPrice) {
         this.actualPrice = actualPrice;
@@ -63,10 +57,6 @@ public class OrderItem implements Serializable {
 
     public String getProduct() {
         return product;
-    }
-
-    public Integer getAmount() {
-        return amount;
     }
 
     public BigDecimal getActualPrice() {
