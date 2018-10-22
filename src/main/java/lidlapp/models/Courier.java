@@ -1,7 +1,6 @@
 package lidlapp.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,7 +29,6 @@ public class Courier implements Serializable {
     @OneToMany(mappedBy = "courier")
     private Set<OrderItem> orderItems = new HashSet<>();
 
-    @JsonIgnore
     @ManyToOne(optional = false)
     private User user;
 

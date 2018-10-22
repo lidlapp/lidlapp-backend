@@ -1,5 +1,7 @@
 package lidlapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -28,6 +30,7 @@ public class User implements Serializable {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "consumer", cascade = CascadeType.ALL)
     private Set<OrderItem> orders = new HashSet<>();
 

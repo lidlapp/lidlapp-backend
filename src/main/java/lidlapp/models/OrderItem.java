@@ -32,7 +32,6 @@ public class OrderItem implements Serializable {
     @Column(nullable = false)
     private boolean outOfStock = false;
 
-    @JsonIgnore
     @ManyToOne
     private User consumer;
 
@@ -70,6 +69,10 @@ public class OrderItem implements Serializable {
 
     public boolean isOutOfStock() {
         return outOfStock;
+    }
+
+    public User getConsumer() {
+        return consumer;
     }
 
     @JsonGetter
